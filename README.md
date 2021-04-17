@@ -15,3 +15,6 @@ pip install Flask
 cd src
 python -m flask run
 ```
+
+## Reference
+- https://github.com/chamkank/flask-chatterbot
