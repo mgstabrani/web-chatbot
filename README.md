@@ -18,3 +18,4 @@ python -m flask run
 
 ## Reference
 - https://github.com/chamkank/flask-chatterbot
+- https://dev.to/lordofdexterity/deploying-flask-app-on-heroku-using-github-50nh
