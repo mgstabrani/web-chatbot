@@ -1,1 +1,1 @@
-web: pwd 
+web: gunicorn --chdir /app/src --bind 0.0.0.0:$PORT app:app
