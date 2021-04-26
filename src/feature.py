@@ -8,6 +8,7 @@ from deadline import *
 kata_penting = ["deadline", "tubes", "tucil", "kuis", "ujian", "pr"]
 kata_help = ["bisa","lakukan","help","command","fitur"]
 kata_tampil_deadline = ["when","deadline","kapan"]
+kata_task_selesai = ["done","selesai","sudah"]
 fitur = [
     "Menambahkan task baru",
     "Melihat daftar task",
@@ -30,6 +31,13 @@ def tampilDeadline(usrMsg):
 
     return "Tidak ada deadline itu"
 
+def tandaiTask(usrMsg):
+    for i in range(len(deadline)):
+        if(matcher.match(usrMsg,deadline[i][0])):
+            deadline.pop(i)
+            return "Task ditandai selesai"
+    return "Task tidak ditemukan"
+
 def help():
     output = "[Fitur]<br>"
     for i in range(len(fitur)):
@@ -47,6 +55,11 @@ def process(usrMsg):
     for pattern in kata_help:
         if (matcher.match(text, pattern)) :
             return help()
+
+    #Menandai task selesai
+    for pattern in kata_task_selesai:
+        if (matcher.match(text, pattern)) :
+            return tandaiTask(text)    
 
     #Menampilkan tanggal deadline suatu task
     for pattern in kata_tampil_deadline:
