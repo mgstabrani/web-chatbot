@@ -21,12 +21,12 @@ def tampilDeadline(usrMsg):
     for i in range(len(deadline)):
         #General untuk tugas
         if(matcher.match(usrMsg,"tugas")):
-            if(matcher.match(usrMsg,deadline[i][1].lower())):
-                return deadline[i][0]
+            if(matcher.match(usrMsg,deadline[i][2].lower())):
+                return deadline[i][1]
         #Spesifik, tucil, tubes atau pr
         else:
-            if(matcher.match(usrMsg,deadline[i][1].lower()) and matcher.match(usrMsg,deadline[i][2].lower())):
-                return deadline[i][0]
+            if(matcher.match(usrMsg,deadline[i][2].lower()) and matcher.match(usrMsg,deadline[i][3].lower())):
+                return deadline[i][1]
 
     return "Tidak ada deadline itu"
 
