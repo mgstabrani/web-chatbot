@@ -1,4 +1,5 @@
 from flask import *
+import feature
 
 app = Flask(__name__)
 
@@ -9,7 +10,7 @@ def home():
 @app.route("/get")
 def get_bot_response():
     userText = request.args.get('msg')
-    return userText
+    return feature.process(userText)
 
 if __name__ == "__main__":
     app.run(debug=True)

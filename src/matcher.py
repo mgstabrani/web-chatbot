@@ -20,7 +20,6 @@ def boyer_moore(text, pattern):
     j = m - 1
 
     while (i <= n - 1):
-        print(text[i], pattern[j])
         if (text[i] == pattern[j]): # looking glass technique
             if (j == 0):
                 return i
@@ -43,3 +42,6 @@ def boyer_moore(text, pattern):
 
     # if not match, return INVALID
     return -1    
+
+def match(text, pattern):
+    return boyer_moore(text, pattern) != -1
