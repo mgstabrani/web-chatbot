@@ -1,6 +1,7 @@
 import matcher
 import re
 from deadline import *
+import basisdata as bd
 
 # mungkin kedepannya perlu dipisah si kata2 pentingnya
 # kayak ada kata penting untuk jenis tugas,
@@ -66,8 +67,20 @@ def process(usrMsg):
         if (matcher.match(text, pattern)) :
             return tampilDeadline(text)
 
-    for pattern in kata_penting:
-        if (matcher.match(text, pattern)) :
-            return "Ada kata penting"
+    kata_penting = bd.getList_Kata_Help()
+    kata_penting += bd.getList_Kata_Tampil_Deadline()
+    kata_penting += bd.getList_Kata_Task_Selesai()
 
-    return "Tidak ditemukan kata penting"
+    kata_input = text.split(" ")
+    found = False
+    for kata in kata_input:
+        for pattern in kata_penting:
+            if kata not in kata_penting:
+                if matcher.similarity(pattern, kata) >= 0.75:
+                    text = text.replace(kata, pattern)
+                    found = True
+
+    if found:
+        return "Mungkin maksud kamu:\n" + text
+
+    return "Maaf, pesan tidak dikenali"
