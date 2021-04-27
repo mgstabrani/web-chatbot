@@ -45,3 +45,32 @@ def boyer_moore(text, pattern):
 
 def match(text, pattern):
     return boyer_moore(text, pattern) != -1
+
+def lev(strA, strB, i, j):
+
+    if min(i,j) == 0:
+        return max(i,j)
+
+    levi = []
+
+    levi.append(lev(strA, strB, i-1, j)+1)
+    levi.append(lev(strA, strB, i, j-1)+1)
+    
+    x = lev(strA, strB, i-1, j-1)
+    if strA[i-1] != strB[j-1]:
+        x += 1
+
+    levi.append(x)
+
+    return min(levi)
+
+
+def levenshtein(strA, strB):
+    
+    return lev(strA, strB, len(strA), len(strB))
+
+def similarity(strA, strB):
+    levValue = levenshtein(strA, strB)
+    lenA = len(strA)
+    lenB = len(strB)
+    return max((lenA-levValue)/lenA, (lenB-levValue)/lenB)
