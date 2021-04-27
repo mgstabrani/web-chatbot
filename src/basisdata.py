@@ -74,7 +74,21 @@ def upsert_Daftar_Tugas(id, tanggal, matkul, jenis, nama, status):
     conn.commit()
     conn.close()
 
-def getList_Daftar_Tugas(status):
+def getList_Daftar_Tugas():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas"
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
+
+def getList_Daftar_Tugas_Status(status):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
     data =[]
@@ -138,7 +152,7 @@ def insert_Kata_penting(kata):
     conn.commit()
     conn.close()
 
-def getList_Kata_Help():
+def getList_Kata_Penting():
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
     data =[]
@@ -251,7 +265,7 @@ def Insert_standar():
     for List in deadline:
         (tgl,bln,th) = List[1].split("/")
         date = datetime.date(int(th),int(bln),int(tgl))
-        print(date)
+        #print(date)
         upsert_Daftar_Tugas(List[0],date,List[2],List[3],List[4],False)
 
 
