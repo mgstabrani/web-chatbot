@@ -34,13 +34,13 @@ def tandaiTask(usrMsg):
 
 def help():
     fitur = db.getList_Fitur()
-    output = "[Fitur]<br>"
+    output = "[Fitur] <br>"
     for i in range(len(fitur)):
-        output += str(i+1) + ". " + fitur[i] + "<br>"
+        output += " " + str(i+1) + ". " + fitur[i] + " <br>"
     output += "<br>"
-    output += "[Daftar kata penting]<br>"
+    output += " [Daftar kata penting] <br>"
     for i in range(len(kata_penting)):
-        output += str(i+1) + ". " + kata_penting[i] + "<br>"
+        output += " " + str(i+1) + ". " + kata_penting[i] + " <br>"
     return output
 
 def process(usrMsg):
