@@ -1,6 +1,7 @@
 import matcher
 import re
-from feature import kata_penting, kata_help, kata_tampil_deadline, kata_task_selesai,fitur
+import basisdata as bd
+import datetime
 
 bulan = {
     "januari": "01",
@@ -17,12 +18,12 @@ bulan = {
     "desember":"12"
 }
 
-text = "ingatkan tubes IF22020 matem pada 2 april 2021"
+text = "ingatkan tubes IF22020 stima pada 30 april 2021"
 def add(text):
     data = []
     textlist = text.split(" ")
     #jenis  matkul tugas  dan tugas
-    for kata in kata_penting: 
+    for kata in bd.getList_Kata_Penting(): 
         for i in range(len(textlist)):
             index = matcher.match( textlist[i].lower() ,kata.lower())
             if(index is not False):
@@ -38,7 +39,7 @@ def add(text):
             break
 
     #tanggal Tugas
-    for kata in kata_tampil_deadline:
+    for kata in bd.getList_Kata_Tampil_Deadline():
         for i in range(len(textlist)):
             index = matcher.match( textlist[i].lower(),kata.lower())
             if(index is not False):
@@ -56,12 +57,15 @@ def add(text):
                     textlist.remove(textlist[i])
 
                 # print(textlist)
-                print(data)
+                #print(data)
                 break
         if(index is not False):
             break
-
     #tinggal menambahkan ke  data base
+    (tgl,bln,th) = data[0].split("/")
+    date = datetime.date(int(th),int(bln),int(tgl))
+    bd.upsert_Daftar_Tugas(len(bd.getList_Daftar_Tugas())+1,date,data[1],data[2],data[3],False)
+
 
 add(text)
         
