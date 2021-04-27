@@ -20,7 +20,7 @@ def createDB():
             matkul    TEXT,
             jenis     TEXT,
             nama      TEXT,
-            status    INTEGER
+            status    BOOLEAN
         );
 
         CREATE TABLE IF NOT EXISTS Kata_Penting (
@@ -74,7 +74,39 @@ def upsert_Daftar_Tugas(id, tanggal, matkul, jenis, nama, status):
     conn.commit()
     conn.close()
 
+def getList_Daftar_Tugas(status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =?"
 
+    value = (status,)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
+
+
+def getList_Daftar_Tugas_tgl(tglMulai, tglSelesai, status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? AND tanggal <=?"
+
+    value = (status,tglMulai,tglSelesai)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
+    
 def insert_Kata_Help(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -83,6 +115,19 @@ def insert_Kata_Help(kata):
     cur.execute(query,value)
     conn.commit()
     conn.close()
+
+def getList_Kata_Help():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = '''SELECT * FROM Kata_Help'''
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("',)","")
+        data.append(kata)
+    
+    return data
+
 
 def insert_Kata_penting(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
@@ -93,6 +138,18 @@ def insert_Kata_penting(kata):
     conn.commit()
     conn.close()
 
+def getList_Kata_Help():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = '''SELECT * FROM Kata_Penting'''
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("',)","")
+        data.append(kata)
+    
+    return data
+
 def insert_Kata_Tampil_Deadline(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -101,6 +158,18 @@ def insert_Kata_Tampil_Deadline(kata):
     cur.execute(query,value)
     conn.commit()
     conn.close()
+
+def getList_Kata_Tampil_Deadline():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = '''SELECT * FROM Kata_Tampil_Deadline'''
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("',)","")
+        data.append(kata)
+    
+    return data
 
 def insert_Kata_Task_Selesai(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
@@ -111,6 +180,18 @@ def insert_Kata_Task_Selesai(kata):
     conn.commit()
     conn.close()
 
+def getList_Kata_Task_Selesai():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = '''SELECT * FROM Kata_Task_Selesai'''
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("',)","")
+        data.append(kata)
+    
+    return data
+
 def insert_Fitur(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -120,12 +201,24 @@ def insert_Fitur(kata):
     conn.commit()
     conn.close()
 
+def getList_Fitur():
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = '''SELECT * FROM Fitur'''
+    for kata in cur.execute(query):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("',)","")
+        data.append(kata)
+    
+    return data
+
 
 def Insert_standar():
     clearDB()
     kata_penting = ["deadline", "tubes", "tucil", "kuis", "ujian", "pr"]
     kata_help = ["bisa","lakukan","help","command","fitur"]
-    kata_tampil_deadline = ["when","deadline","kapan","pada"]
+    kata_tampil_deadline = ["when","deadline","kapan","pada", "hari", "ini", "minggu","bulan","antara","semua","apa","saja", "saat", "sejauh","depan"]
     kata_task_selesai = ["done","selesai","sudah"]
     fitur = [
         "Menambahkan task baru",
@@ -159,11 +252,16 @@ def Insert_standar():
         (tgl,bln,th) = List[1].split("/")
         date = datetime.date(int(th),int(bln),int(tgl))
         print(date)
-        upsert_Daftar_Tugas(List[0],date,List[2],List[3],List[4],0)
+        upsert_Daftar_Tugas(List[0],date,List[2],List[3],List[4],False)
 
 
-Insert_standar()
-
-
-
-
+#DOKUMENTASI
+#Insert_standar()
+# print( getList_Kata_Help())
+# print( getList_Kata_Tampil_Deadline())
+# print( getList_Kata_Task_Selesai())
+# print( getList_Fitur())
+# print(getList_Daftar_Tugas( 0))
+# date1 = datetime.date(2021,5,20)
+# date2 = datetime.date(2021,8,22)
+# print(getList_Daftar_Tugas_tgl(date1,date2,0))
