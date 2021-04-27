@@ -61,9 +61,9 @@ def process(usrMsg):
         if (matcher.match(text, pattern)) :
             return tampilDeadline(text)
 
-    kata_penting = bd.getList_Kata_Help()
-    kata_penting += bd.getList_Kata_Tampil_Deadline()
-    kata_penting += bd.getList_Kata_Task_Selesai()
+    kata_penting = db.getList_Kata_Help()
+    kata_penting += db.getList_Kata_Tampil_Deadline()
+    kata_penting += db.getList_Kata_Task_Selesai()
 
     kata_input = text.split(" ")
     found = False
