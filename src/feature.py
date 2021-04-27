@@ -1,25 +1,17 @@
 import matcher
 import re
-from deadline import *
-import basisdata as bd
+import basisdata as db
 
 # mungkin kedepannya perlu dipisah si kata2 pentingnya
 # kayak ada kata penting untuk jenis tugas,
 # ada kata penting untuk jenis pertanyaan, dll
-kata_penting = ["deadline", "tubes", "tucil", "kuis", "ujian", "pr"]
-kata_help = ["bisa","lakukan","help","command","fitur"]
-kata_tampil_deadline = ["when","deadline","kapan"]
-kata_task_selesai = ["done","selesai","sudah"]
-fitur = [
-    "Menambahkan task baru",
-    "Melihat daftar task",
-    "Menampilkan deadline dari suatu task tertentu",
-    "Memperbaharui task tertentu",
-    "Menandai bahwa suatu task sudah dikerjakan",
-    "Memberikan rekomendasi kata"
-    ]
+kata_penting = db.getList_Kata_Penting()
+kata_help = db.getList_Kata_Help()
+kata_tampil_deadline = db.getList_Kata_Tampil_Deadline()
+kata_task_selesai = db.getList_Kata_Task_Selesai()
 
 def tampilDeadline(usrMsg):
+    deadline = db.getList_Daftar_Tugas_Status(False)
     for i in range(len(deadline)):
         #General untuk tugas
         if(matcher.match(usrMsg,"tugas")):
@@ -33,13 +25,15 @@ def tampilDeadline(usrMsg):
     return "Tidak ada deadline itu"
 
 def tandaiTask(usrMsg):
+    deadline = db.getList_Daftar_Tugas_Status(False)
     for i in range(len(deadline)):
         if(matcher.match(usrMsg,deadline[i][0])):
-            deadline.pop(i)
+            db.upsert_Daftar_Tugas(deadline[i][0], deadline[i][1], deadline[i][2], deadline[i][3], deadline[i][4], True)
             return "Task ditandai selesai"
     return "Task tidak ditemukan"
 
 def help():
+    fitur = db.getList_Fitur()
     output = "[Fitur]<br>"
     for i in range(len(fitur)):
         output += str(i+1) + ". " + fitur[i] + "<br>"
