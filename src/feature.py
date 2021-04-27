@@ -1,6 +1,5 @@
 import matcher
 import re
-from deadline import *
 import basisdata as db
 
 # mungkin kedepannya perlu dipisah si kata2 pentingnya
