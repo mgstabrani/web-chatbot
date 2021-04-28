@@ -3,9 +3,6 @@ import re
 import basisdata as db
 import addTugas as at
 
-# mungkin kedepannya perlu dipisah si kata2 pentingnya
-# kayak ada kata penting untuk jenis tugas,
-# ada kata penting untuk jenis pertanyaan, dll
 kata_penting = db.getList_Kata_Penting()
 kata_help = db.getList_Kata_Help()
 kata_tampil_deadline = db.getList_Kata_Tampil_Deadline()
