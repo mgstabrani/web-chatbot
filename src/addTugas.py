@@ -18,7 +18,7 @@ bulan = {
     "desember":"12"
 }
 
-# text = "ID 4 undur pada 2/05/2021"
+# text = "ID 4 diubah pada 3/05/2021"
 
 
 def daftar_katakunci(text):
@@ -44,8 +44,7 @@ def daftar_katakunci(text):
 
 def ValidasiInput(text):
     data = daftar_katakunci(text)
-    print(data)
-    if(matcher.match(str(text).lower(),"ubah") or matcher.match(str(text).lower(),"ubah") ):
+    if(matcher.match(str(text).lower(),"undur") or matcher.match(str(text).lower(),"ubah") ):
         if("pada" not in data):
             return """Gunakan kata "pada" sebelum tanggal"""
         else:
