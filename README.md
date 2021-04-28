@@ -25,7 +25,7 @@ pip install Flask
 cd src
 python -m flask run
 ```
-- You can also see the deployement [here](botstimaku.herokuapp.com)
+- You can also see the deployement [here](https://botstimaku.herokuapp.com/)
 
 ## Features
 - Adding new task.
