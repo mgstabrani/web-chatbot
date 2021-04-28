@@ -10,7 +10,7 @@ This project is one of tasks in IF2211 Strategi Algoritma. The goal of this proj
 * Heroku
 
 ## Install
-- clone
+- clone this repository
 ```
 git clone https://github.com/farishasim/tubes-3-stima.git
 ```
@@ -20,10 +20,12 @@ pip install Flask
 ```
 
 ## Run
+- Follow this instruction to run in your local web browser.
 ```
 cd src
 python -m flask run
 ```
+- You can also see the deployement [here](botstimaku.herokuapp.com)
 
 ## Features
 - Adding new task.
