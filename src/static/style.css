@@ -1,5 +1,7 @@
 body {
     font-family: Garamond;
+    background-image: url("/static/img/hex-l.png");
+    background-repeat: repeat;
 }
 
 h1 {
@@ -20,14 +22,14 @@ h3 {
 #chatbox {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 80%;
     margin-top: 60px;
 }
 
 #userInput {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 80%;
     margin-top: 60px;
 }
 
@@ -51,12 +53,17 @@ h3 {
     font-size: 17px;
     text-align: right;
     line-height: 30px;
+    white-space: pre-wrap;
 }
 
-.userText span {
+.userText {
     background-color: #009688;
     padding: 10px;
-    border-radius: 2px;
+    border-radius: 15px;
+    margin: 0 0 0 auto;
+    /* float:right; */
+    max-width: 550px;
+    word-wrap: break-word;
 }
 
 .botText {
@@ -65,12 +72,16 @@ h3 {
     font-size: 17px;
     text-align: left;
     line-height: 30px;
+    white-space: pre-wrap;
+    width: 550px;
 }
 
-.botText span {
+.botText {
     background-color: #EF5350;
     padding: 10px;
-    border-radius: 2px;
+    max-width: 550px;
+    border-radius: 15px;
+    /* white-space: pre-line; */
 }
 
 #tidbit {
@@ -78,4 +89,24 @@ h3 {
     bottom:0;
     right:0;
     width: 300px;
+}
+
+.boxed {
+    background-color:whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 60px;
+    border: 5px solid #009688;
+    border-radius: 15px;
+}
+
+.title {
+    background-color:whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    width: 30%;
+    border: 5px solid #009688;
+    border-radius: 15px;
 }
