@@ -3,9 +3,6 @@ import re
 import basisdata as db
 import addTugas as at
 
-# mungkin kedepannya perlu dipisah si kata2 pentingnya
-# kayak ada kata penting untuk jenis tugas,
-# ada kata penting untuk jenis pertanyaan, dll
 kata_penting = db.getList_Kata_Penting()
 kata_help = db.getList_Kata_Help()
 kata_tampil_deadline = db.getList_Kata_Tampil_Deadline()
@@ -27,8 +24,14 @@ def tampilDeadline(usrMsg):
 
 def tandaiTask(usrMsg):
     deadline = db.getList_Daftar_Tugas_Status(False)
+    temp = re.findall(r'\d+', usrMsg)
+    id = list(map(int, temp))
+    if(len(id) > 0):
+        id = str(id[0])
+    else:
+        id = str(-1)
     for i in range(len(deadline)):
-        if(matcher.match(usrMsg,deadline[i][0])):
+        if(id == deadline[i][0]):
             db.upsert_Daftar_Tugas(deadline[i][0], deadline[i][1], deadline[i][2], deadline[i][3], deadline[i][4], True)
             return "Task ditandai selesai"
     return "Task tidak ditemukan"

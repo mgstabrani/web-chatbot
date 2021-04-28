@@ -48,7 +48,6 @@ def ValidasiInput(text):
     
     else:
         data = daftar_katakunci(text)
-        print(data)
         if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
             if(len(data)== 1):
                 if("tanggal" not in data and "pada" not in data):
@@ -57,8 +56,6 @@ def ValidasiInput(text):
                     return """Gunakan kata ["tubes", "tucil", "kuis", "ujian", "pr"]"""
             else:
                 return add(text)
-  
-            
 
         elif("antara" in data):
             if("tubes" in data):
@@ -74,7 +71,6 @@ def ValidasiInput(text):
             else:
                 return antaraTanggal(text)
           
-
         elif("depan" in data):
             
             if ("hari" in data):
@@ -139,7 +135,6 @@ def ValidasiInput(text):
         else:
             return "-1"
 
-
 def haritask_Jenis(text,jenis):
     found = False
     textlist = text.split(" ")
@@ -203,7 +198,6 @@ def minggutask(text):
     if(not found):
         return "-1"
 
-
 def minggutask_Jenis(text,jenis):
     found = False
     textlist = text.split(" ")
@@ -225,7 +219,6 @@ def minggutask_Jenis(text,jenis):
     if(not found):
         return "-1"
 
-
 def nHariKedepan(N):
     base = datetime.datetime.today()
     date_list = [base + datetime.timedelta(days=x) for x in range(N+1)]
@@ -240,7 +233,6 @@ def hariIni():
     for tugas in daftar:
         output += "(ID: " +tugas[0] +") " + tugas[1] +" "+ tugas[2] +" "+tugas[3] +" <br>"
     return output
-
     
 def hariIni_Jenis(jenis):
     output = "[Menampilkan "+jenis +" hari ini]<br>"
@@ -269,7 +261,6 @@ def sejauhIni_Jenis(jenis):
         output += "(ID: " +tugas[0] +") " + tugas[1] +" "+tugas[2] +" "+ tugas[3] +" <br>"
     
     return str(output)
-
 
 def antaraTanggal(text):
     data = []
@@ -309,7 +300,6 @@ def antaraTanggal(text):
     else:
         return "-1"
 
-
 def antaraTanggal_Jenis(text, jenis):
     data = []
     textlist = text.split(" ")
@@ -339,7 +329,7 @@ def antaraTanggal_Jenis(text, jenis):
         output = "[Menampilkan daftar "+ jenis + str(date1) +" - "+ str(date2) +"] <br>"
         daftar = bd.getList_Daftar_Tugas_Jenis_tgl(jenis,date1,date2,False)
         if(len(daftar)== 0):
-            return "Tidak ada "+jenis+" antara "+  + str(date1) +" - "+ str(date2)
+            return "Tidak ada "+jenis+" antara "+ str(date1) +" - "+ str(date2)
 
         for tugas in daftar:
             output += "(ID: " +tugas[0] +") " + tugas[1]+" "+tugas[2]+" "+ tugas[3] +" <br>"
@@ -347,8 +337,6 @@ def antaraTanggal_Jenis(text, jenis):
         return output
     else:
         return "-1"
-
-
 
 def diundurTask(usrMsg):
     found = False
@@ -373,9 +361,7 @@ def diundurTask(usrMsg):
     if(found == False):
         return "-1"
     
-
 def add(text):
-
     data = []
     textlist = text.split(" ")
     #jenis  matkul tugas  dan tugas
@@ -416,9 +402,7 @@ def add(text):
                 else:
                     bulan_int = bulan.get(textlist[i+2].lower())
                     tanggal = textlist[i+1] +"/"+ bulan_int +"/"+textlist[i+3]
-                    data.insert(0,tanggal)
-
-                
+                    data.insert(0,tanggal)       
                 break
         if(index is not False):
             break
