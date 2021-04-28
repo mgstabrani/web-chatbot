@@ -18,7 +18,7 @@ bulan = {
     "desember":"12"
 }
 
-# text = "deadline antara 22/04/2021 sampai 22/08/2021"
+# text = "ID 4 diubah pada 3/05/2021"
 
 
 def daftar_katakunci(text):
@@ -43,11 +43,15 @@ def daftar_katakunci(text):
     return data
 
 def ValidasiInput(text):
-    if(matcher.match(str(text).lower(),"diundur")):
-        return diundurTask(text)
+    data = daftar_katakunci(text)
+    if(matcher.match(str(text).lower(),"undur") or matcher.match(str(text).lower(),"ubah") ):
+        if("pada" not in data):
+            return """Gunakan kata "pada" sebelum tanggal"""
+        else:
+            return diundurTask(text)
     
     else:
-        data = daftar_katakunci(text)
+        
         if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
             if(len(data)== 1):
                 if("tanggal" not in data and "pada" not in data):
@@ -213,7 +217,7 @@ def minggutask_Jenis(text,jenis):
             if(len(daftar)== 0):
                 return "Tidak ada "+ jenis+ " "+ str(N) +" minggu ke depan"
             for tugas in daftar:
-                output += "(ID: " +tugas[0] +")" + tugas[1],tugas[2],tugas[3] +"<br>"
+                output += "(ID: " +tugas[0] +")" + tugas[1] + " "+ tugas[2]+ " "+ tugas[3] +"<br>"
             return output
 
     if(not found):
@@ -342,7 +346,7 @@ def diundurTask(usrMsg):
     found = False
     text = str(usrMsg).split(" ")
     for i in range(len(text)):
-        if(matcher.match(text[i],"diundur")):
+        if(matcher.match(text[i],"undur")or matcher.match(text[i],"ubah")):
             
             if(len(text[i+2]) > 2):
                 tanggal = text[i+2]
@@ -411,10 +415,13 @@ def add(text):
         (tgl,bln,th) = re.split("/", data[0])
         date = datetime.date(int(th),int(bln),int(tgl))
         N = len(bd.getList_Daftar_Tugas())+1
-        bd.upsert_Daftar_Tugas(N,date,data[1],data[2],data[3],False)
-        output = "[ ===== Berhasil Ditambahkan =====]<br>"
-        output += "(ID: " +str(N) +") " + str(date)+" "+data[1]+" "+data[2]+" "+data[3] +"<br>"
-        return output
+        if(bd.IsInputValid(date,data[1],data[2],data[3],False)):
+            bd.upsert_Daftar_Tugas(N,date,data[1],data[2],data[3],False)
+            output = "[ ===== Berhasil Ditambahkan =====]<br>"
+            output += "(ID: " +str(N) +") " + str(date)+" "+data[1]+" "+data[2]+" "+data[3] +"<br>"
+            return output
+        else:
+            return "Data yang sama telah digunakan"
     else:
         return "-1"
 
