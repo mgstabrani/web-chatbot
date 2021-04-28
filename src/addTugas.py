@@ -411,10 +411,13 @@ def add(text):
         (tgl,bln,th) = re.split("/", data[0])
         date = datetime.date(int(th),int(bln),int(tgl))
         N = len(bd.getList_Daftar_Tugas())+1
-        bd.upsert_Daftar_Tugas(N,date,data[1],data[2],data[3],False)
-        output = "[ ===== Berhasil Ditambahkan =====]<br>"
-        output += "(ID: " +str(N) +") " + str(date)+" "+data[1]+" "+data[2]+" "+data[3] +"<br>"
-        return output
+        if(bd.IsInputValid(date,data[1],data[2],data[3],False)):
+            bd.upsert_Daftar_Tugas(N,date,data[1],data[2],data[3],False)
+            output = "[ ===== Berhasil Ditambahkan =====]<br>"
+            output += "(ID: " +str(N) +") " + str(date)+" "+data[1]+" "+data[2]+" "+data[3] +"<br>"
+            return output
+        else:
+            return "Data yang sama telah digunakan"
     else:
         return "-1"
 

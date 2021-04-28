@@ -128,6 +128,23 @@ def getList_Daftar_Tugas_Jenis_Status(jenis,status):
 
     return data
 
+
+def IsInputValid(tanggal,matkul,jenis,nama,status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND jenis =? AND nama = ? AND tanggal=? AND matkul =?"
+
+    value = (status,jenis,nama,tanggal,matkul)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data ==[]
+
 def getList_Daftar_Tugas_tgl(tglMulai, tglSelesai, status):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -339,7 +356,7 @@ def Insert_standar():
 
 
 #DOKUMENTASI
-Insert_standar()
+# Insert_standar()
 # print( getList_Kata_Help())
 # print( getList_Kata_Tampil_Deadline())
 # print( getList_Kata_Task_Selesai())
@@ -348,3 +365,7 @@ Insert_standar()
 # date1 = datetime.date(2021,5,20)
 # date2 = datetime.date(2021,8,22)
 # print(getList_Daftar_Tugas_tgl(date1,date2,0))
+# tgl = "22/08/2021"
+# (tgl,bln,th) = tgl.split("/")
+# date = datetime.date(int(th),int(bln),int(tgl))
+# print(IsInputValid(date,"IF2240","tubes","String Matching",False))
