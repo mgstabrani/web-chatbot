@@ -22,6 +22,17 @@ cd src
 python -m flask run
 ```
 
+## Features
+- Adding new task.
+- Display list of task.
+- Display a deadline of certain task.
+- Renew particular task.
+- Mark a task as done.
+- Help option.
+- List of key words.
+- Error message.
+- Word recommendation.
+
 ## Author
 - [Faris Hasim Syauqi (13519050)](https://github.com/farishasim)
 - [Mgs. Tabrani (13519122)](https://github.com/mgstabrani)
