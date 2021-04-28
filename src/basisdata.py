@@ -2,10 +2,8 @@ import sqlite3
 import datetime
 import time
 
-
 #root of path
 path = '../test/'
-
 
 # MEMBUAT BASIS DATA (semua tabel)
 # ===================================Asumsi data base pusat=========================================
@@ -43,7 +41,6 @@ def createDB():
         
         """)
     conn.commit()
-
 
 def clearDB():
     conn = sqlite3.connect(path +'BasisData.sqlite')
@@ -114,7 +111,6 @@ def getList_Daftar_Tugas_Status(status):
         data.append(kata.split("#-#"))
 
     return data
-
 
 def getList_Daftar_Tugas_Jenis_Status(jenis,status):
     conn = sqlite3.connect(path +'BasisData.sqlite')
@@ -217,7 +213,6 @@ def getList_Kata_Help():
     
     return data
 
-
 def insert_Kata_penting(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -302,7 +297,6 @@ def getList_Fitur():
     
     return data
 
-
 def Insert_standar():
     clearDB()
     kata_penting = ["deadline", "tubes", "tucil", "kuis", "ujian", "pr"]
@@ -354,4 +348,3 @@ Insert_standar()
 # date1 = datetime.date(2021,5,20)
 # date2 = datetime.date(2021,8,22)
 # print(getList_Daftar_Tugas_tgl(date1,date2,0))
-
