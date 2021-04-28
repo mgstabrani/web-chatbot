@@ -18,7 +18,7 @@ bulan = {
     "desember":"12"
 }
 
-#text = "bot, tambahain tube iF3030 gamebot pada 29 april 202"
+# text = "deadline antara 22/04/2021 sampai 22/08/2021"
 
 
 def daftar_katakunci(text):
@@ -298,8 +298,9 @@ def antaraTanggal(text):
         date2 = datetime.date(int(th),int(bln),int(tgl))
         daftar =bd.getList_Daftar_Tugas_tgl(date1,date2,False)
         if(len(daftar)== 0):
-            return "Tidak ada deadline antara "+  + str(date1) +" - "+ str(date2)
-        output = "[Menampilkan deadline antara "+  + str(date1) +" - "+ str(date2) +"] <br>"
+            return "Tidak ada deadline antara "+  str(date1) +" - "+ str(date2)
+
+        output = "[Menampilkan deadline antara "+  str(date1) +" - "+ str(date2) +"] <br>"
         for tugas in daftar:
             output += "(ID: " +tugas[0] +") " + tugas[1] +" "+ tugas[2] +" "+tugas[3] +" <br>"
 
@@ -436,7 +437,7 @@ def add(text):
 
 #add(text)
 #print( bd.getList_Daftar_Tugas_tglMulai(datetime.date.today(),False))
-#print(ValidasiInput(text))
+# print(ValidasiInput(text))
         
 
         
