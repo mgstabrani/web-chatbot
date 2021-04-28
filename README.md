@@ -1,13 +1,16 @@
 # Tubes 3 Stima
 > A simple web-based chatbot (deadline reminder assistant) implemented using string matching (Boyer-Moore and Regular Expression) algorithm.
  
+## General Info
+This project is one of tasks in IF2211 Strategi Algoritma. The goal of this project is to create a web-based chatbot which can be a task reminder assistant. This project must be implemented using string matching algorithm such as Knuth-Morris-Pratt, Boyer-Moore, and Regular Expression.
+
 ## Technologies
 * Python 3 (minimum)
 * Flask
 * Heroku
 
 ## Install
-- clone repository ini
+- clone
 ```
 git clone https://github.com/farishasim/tubes-3-stima.git
 ```
@@ -17,12 +20,10 @@ pip install Flask
 ```
 
 ## Run
-- Untuk menjalankan di web lokal, dapat dengan cara berikut ini
 ```
 cd src
 python -m flask run
 ```
-- Selain itu, anda juga dapat menjalankan web yang sudah di-deploy secara online pada link botstimaku.herokuapp.com
 
 ## Features
 - Adding new task.
