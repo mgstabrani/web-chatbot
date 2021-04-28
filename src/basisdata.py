@@ -4,7 +4,7 @@ import time
 
 
 #root of path
-path = 'basisdata/'
+path = '../test/'
 
 
 # MEMBUAT BASIS DATA (semua tabel)

@@ -18,7 +18,7 @@ bulan = {
     "desember":"12"
 }
 
-text = "deadline sejauh ini"
+#text = "bot, tambahain tube iF3030 gamebot pada 29 april 202"
 
 
 def daftar_katakunci(text):
@@ -27,7 +27,7 @@ def daftar_katakunci(text):
     for kata in bd.getList_Kata_Penting()[1:]: 
         for i in range(len(textlist)):
             index = matcher.match( textlist[i].lower() ,kata.lower())
-            if(index):
+            if(index and len(kata)+1 >= len(textlist[i])+1 ):
                 data.append(kata)
                 break
         if(index):
@@ -50,7 +50,14 @@ def ValidasiInput(text):
         data = daftar_katakunci(text)
         print(data)
         if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
-           return add(text)
+            if(len(data)== 1):
+                if("tanggal" not in data and "pada" not in data):
+                    return """Gunakan kata ["tangal", "pada"] sebelum tanggal"""
+                else:
+                    return """Gunakan kata ["tubes", "tucil", "kuis", "ujian", "pr"]"""
+            else:
+                return add(text)
+  
             
 
         elif("antara" in data):
@@ -285,9 +292,9 @@ def antaraTanggal(text):
 
             break
     if (len(data) == 2):
-        (tgl,bln,th) = data[0].split("/")
+        (tgl,bln,th) = re.split("/", data[0])
         date1 = datetime.date(int(th),int(bln),int(tgl))
-        (tgl,bln,th) = data[1].split("/")
+        (tgl,bln,th) = re.split("/", data[1])
         date2 = datetime.date(int(th),int(bln),int(tgl))
         daftar =bd.getList_Daftar_Tugas_tgl(date1,date2,False)
         if(len(daftar)== 0):
@@ -323,9 +330,9 @@ def antaraTanggal_Jenis(text, jenis):
 
             break
     if (len(data) == 2):
-        (tgl,bln,th) = data[0].split("/")
+        (tgl,bln,th) = re.split("/", data[0])
         date1 = datetime.date(int(th),int(bln),int(tgl))
-        (tgl,bln,th) = data[1].split("/")
+        (tgl,bln,th) = re.split("/", data[1])
         date2 = datetime.date(int(th),int(bln),int(tgl))
         # rubah rertun list
         output = "[Menampilkan daftar "+ jenis + str(date1) +" - "+ str(date2) +"] <br>"
@@ -355,7 +362,7 @@ def diundurTask(usrMsg):
                 bulan_int = bulan.get(text[i+3].lower())
                 tanggal = text[i+2] +"/"+ bulan_int +"/"+text[i+4]
 
-            (tgl,bln,th) = tanggal.split("/")
+            (tgl,bln,th) = re.split("/", tanggal)
             date = datetime.date(int(th),int(bln),int(tgl))
             bd.update_Daftar_Tugas(text[i-1],date)
             found = True
@@ -416,7 +423,7 @@ def add(text):
             break
 
     if(len(data)== 4):
-        (tgl,bln,th) = data[0].split("/")
+        (tgl,bln,th) = re.split("/", data[0])
         date = datetime.date(int(th),int(bln),int(tgl))
         N = len(bd.getList_Daftar_Tugas())+1
         bd.upsert_Daftar_Tugas(N,date,data[1],data[2],data[3],False)
@@ -429,7 +436,7 @@ def add(text):
 
 #add(text)
 #print( bd.getList_Daftar_Tugas_tglMulai(datetime.date.today(),False))
-print(ValidasiInput(text))
+#print(ValidasiInput(text))
         
 
         
