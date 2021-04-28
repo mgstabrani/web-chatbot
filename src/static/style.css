@@ -54,15 +54,16 @@ h3 {
     text-align: right;
     line-height: 30px;
     white-space: pre-wrap;
-    /* width: 550px; */
 }
 
-.userText span {
+.userText {
     background-color: #009688;
     padding: 10px;
-    border-radius: 2px;
-    max-width: 550px;
     border-radius: 15px;
+    margin: 0 0 0 auto;
+    /* float:right; */
+    max-width: 550px;
+    word-wrap: break-word;
 }
 
 .botText {
@@ -78,7 +79,6 @@ h3 {
 .botText {
     background-color: #EF5350;
     padding: 10px;
-    border-radius: 2px;
     max-width: 550px;
     border-radius: 15px;
     /* white-space: pre-line; */
