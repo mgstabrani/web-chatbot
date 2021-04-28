@@ -74,6 +74,17 @@ def upsert_Daftar_Tugas(id, tanggal, matkul, jenis, nama, status):
     conn.commit()
     conn.close()
 
+def update_Daftar_Tugas(id, tanggal):
+    # insert data baru ketika id (PK) unik  atau update data ketika PK sudah ada di data
+
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    query = '''UPDATE Daftar_Tugas SET tanggal =? WHERE id = ?'''
+    value = (tanggal, id)
+    cur.execute(query,value)
+    conn.commit()
+    conn.close()
+
 def getList_Daftar_Tugas():
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -105,11 +116,27 @@ def getList_Daftar_Tugas_Status(status):
     return data
 
 
+def getList_Daftar_Tugas_Jenis_Status(jenis,status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND jenis =?"
+
+    value = (status,jenis)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
+
 def getList_Daftar_Tugas_tgl(tglMulai, tglSelesai, status):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
     data =[]
-    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? AND tanggal <=?"
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? AND tanggal <=? ORDER BY tanggal"
 
     value = (status,tglMulai,tglSelesai)
     for kata in cur.execute(query,value):
@@ -120,7 +147,55 @@ def getList_Daftar_Tugas_tgl(tglMulai, tglSelesai, status):
         data.append(kata.split("#-#"))
 
     return data
+
+def getList_Daftar_Tugas_Jenis_tgl(jenis, tglMulai, tglSelesai, status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? AND tanggal <=? AND jenis =? ORDER BY tanggal"
+
+    value = (status,tglMulai,tglSelesai,jenis)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
+
+def getList_Daftar_Tugas_tglMulai(tglMulai, status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? ORDER BY tanggal"
+
+    value = (status,tglMulai)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data
     
+def getList_Daftar_Tugas_Jenis_tglMulai(jenis,tglMulai, status):
+    conn = sqlite3.connect(path +'BasisData.sqlite')
+    cur = conn.cursor()
+    data =[]
+    query = "SELECT id, tanggal, matkul, jenis, nama FROM Daftar_Tugas WHERE status =? AND tanggal >= ? AND jenis =? ORDER BY tanggal"
+
+    value = (status,tglMulai,jenis)
+    for kata in cur.execute(query,value):
+        kata = str(kata).replace("('","")
+        kata = str(kata).replace("', '","#-#")
+        kata = str(kata).replace("')","")
+        kata.split("#-#")
+        data.append(kata.split("#-#"))
+
+    return data 
+
 def insert_Kata_Help(kata):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -232,7 +307,7 @@ def Insert_standar():
     clearDB()
     kata_penting = ["deadline", "tubes", "tucil", "kuis", "ujian", "pr"]
     kata_help = ["bisa","lakukan","help","command","fitur"]
-    kata_tampil_deadline = ["when","deadline","kapan","pada", "hari", "ini", "minggu","bulan","antara","semua","apa","saja", "saat", "sejauh","depan"]
+    kata_tampil_deadline = ["when","deadline","kapan","pada","tanggal", "hari", "minggu","antara", "sejauh","depan"]
     kata_task_selesai = ["done","selesai","sudah"]
     fitur = [
         "Menambahkan task baru",
@@ -243,9 +318,9 @@ def Insert_standar():
         "Memberikan rekomendasi kata"
         ]
     deadline = [
-    ["1","22/08/2021","IF2240","Tubes","String Matching"],
-    ["2","21/07/2021","IF2230","Tucil","Normalisasi"],
-    ["3","22/05/2021","IF2230","Tubes","Index Tuning"]]
+    ["1","22/08/2021","IF2240","tubes","String Matching"],
+    ["2","21/07/2021","IF2230","tucil","Normalisasi"],
+    ["3","22/05/2021","IF2230","tubes","Index Tuning"]]
 
     for kata in kata_penting:
         insert_Kata_penting(kata)
@@ -270,7 +345,7 @@ def Insert_standar():
 
 
 #DOKUMENTASI
-#Insert_standar()
+Insert_standar()
 # print( getList_Kata_Help())
 # print( getList_Kata_Tampil_Deadline())
 # print( getList_Kata_Task_Selesai())
@@ -279,3 +354,4 @@ def Insert_standar():
 # date1 = datetime.date(2021,5,20)
 # date2 = datetime.date(2021,8,22)
 # print(getList_Daftar_Tugas_tgl(date1,date2,0))
+

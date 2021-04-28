@@ -1,6 +1,7 @@
 import matcher
 import re
 import basisdata as db
+import addTugas as at
 
 # mungkin kedepannya perlu dipisah si kata2 pentingnya
 # kayak ada kata penting untuk jenis tugas,
@@ -44,37 +45,42 @@ def help():
     return output
 
 def process(usrMsg):
-    text = str(usrMsg).lower()
+    result = at.ValidasiInput(usrMsg)
+    if(result =="-1"):
+        text = str(usrMsg).lower()
 
-    #Menampilkan help
-    for pattern in kata_help:
-        if (matcher.match(text, pattern)) :
-            return help()
+        #Menampilkan help
+        for pattern in kata_help:
+            if (matcher.match(text, pattern)) :
+                return help()
 
-    #Menandai task selesai
-    for pattern in kata_task_selesai:
-        if (matcher.match(text, pattern)) :
-            return tandaiTask(text)    
+        #Menandai task selesai
+        for pattern in kata_task_selesai:
+            if (matcher.match(text, pattern)) :
+                return tandaiTask(text)    
 
-    #Menampilkan tanggal deadline suatu task
-    for pattern in kata_tampil_deadline:
-        if (matcher.match(text, pattern)) :
-            return tampilDeadline(text)
+        #Menampilkan tanggal deadline suatu task
+        for pattern in kata_tampil_deadline:
+            if (matcher.match(text, pattern)) :
+                return tampilDeadline(text)
 
-    kata_penting = db.getList_Kata_Help()
-    kata_penting += db.getList_Kata_Tampil_Deadline()
-    kata_penting += db.getList_Kata_Task_Selesai()
+        kata_penting = db.getList_Kata_Help()
+        kata_penting += db.getList_Kata_Tampil_Deadline()
+        kata_penting += db.getList_Kata_Task_Selesai()
 
-    kata_input = text.split(" ")
-    found = False
-    for kata in kata_input:
-        for pattern in kata_penting:
-            if kata not in kata_penting:
-                if matcher.similarity(pattern, kata) >= 0.75:
-                    text = text.replace(kata, pattern)
-                    found = True
+        kata_input = text.split(" ")
+        found = False
+        for kata in kata_input:
+            for pattern in kata_penting:
+                if kata not in kata_penting:
+                    if matcher.similarity(pattern, kata) >= 0.75:
+                        text = text.replace(kata, pattern)
+                        found = True
 
-    if found:
-        return "Mungkin maksud kamu:\n" + text
+        if found:
+            return "Mungkin maksud kamu:\n" + text
 
-    return "Maaf, pesan tidak dikenali"
+        return "Maaf, pesan tidak dikenali"
+        
+    else:
+        return result
