@@ -1,5 +1,7 @@
 # Tubes 3 Stima
 > A simple web-based chatbot (deadline reminder assistant) implemented using string matching (Boyer-Moore and Regular Expression) algorithm.
+> 
+![tampilan awal](img/Screenshot%20from%202021-04-28%2023-02-37.png)
  
 ## General Info
 This project is one of tasks in IF2211 Strategi Algoritma. The goal of this project is to create a web-based chatbot which can be a task reminder assistant. This project must be implemented using string matching algorithm such as Knuth-Morris-Pratt, Boyer-Moore, and Regular Expression.
