@@ -1,5 +1,7 @@
 body {
     font-family: Garamond;
+    background-image: url("/static/img/hex-l.png");
+    background-repeat: repeat;
 }
 
 h1 {
@@ -20,14 +22,14 @@ h3 {
 #chatbox {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 80%;
     margin-top: 60px;
 }
 
 #userInput {
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 80%;
     margin-top: 60px;
 }
 
@@ -87,4 +89,24 @@ h3 {
     bottom:0;
     right:0;
     width: 300px;
+}
+
+.boxed {
+    background-color:whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 60px;
+    border: 5px solid #009688;
+    border-radius: 15px;
+}
+
+.title {
+    background-color:whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    width: 30%;
+    border: 5px solid #009688;
+    border-radius: 15px;
 }
