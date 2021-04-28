@@ -7,7 +7,7 @@
 * Heroku
 
 ## Install
-- clone
+- clone repository ini
 ```
 git clone https://github.com/farishasim/tubes-3-stima.git
 ```
@@ -17,10 +17,12 @@ pip install Flask
 ```
 
 ## Run
+- Untuk menjalankan di web lokal, dapat dengan cara berikut ini
 ```
 cd src
 python -m flask run
 ```
+- Selain itu, anda juga dapat menjalankan web yang sudah di-deploy secara online pada link botstimaku.herokuapp.com
 
 ## Features
 - Adding new task.
