@@ -1,5 +1,10 @@
 # Tubes 3 Stima
 > A simple web-based chatbot (deadline reminder assistant) implemented using string matching (Boyer-Moore and Regular Expression) algorithm.
+ 
+## Technologies
+* Python 3 (minimum)
+* Flask
+* Heroku
 
 ## Install
 - clone
