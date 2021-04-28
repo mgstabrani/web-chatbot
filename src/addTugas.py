@@ -18,7 +18,7 @@ bulan = {
     "desember":"12"
 }
 
-# text = "deadline antara 22/04/2021 sampai 22/08/2021"
+#text = "Deadline tubes 3 hari ke depan"
 
 
 def daftar_katakunci(text):
@@ -213,7 +213,7 @@ def minggutask_Jenis(text,jenis):
             if(len(daftar)== 0):
                 return "Tidak ada "+ jenis+ " "+ str(N) +" minggu ke depan"
             for tugas in daftar:
-                output += "(ID: " +tugas[0] +")" + tugas[1],tugas[2],tugas[3] +"<br>"
+                output += "(ID: " +tugas[0] +")" + tugas[1] + " "+ tugas[2]+ " "+ tugas[3] +"<br>"
             return output
 
     if(not found):
@@ -421,7 +421,7 @@ def add(text):
 
 #add(text)
 #print( bd.getList_Daftar_Tugas_tglMulai(datetime.date.today(),False))
-# print(ValidasiInput(text))
+#print(ValidasiInput(text))
         
 
         
