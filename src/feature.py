@@ -75,10 +75,12 @@ def process(usrMsg):
         found = False
         for kata in kata_input:
             for pattern in kata_penting:
-                if kata not in kata_penting:
-                    if matcher.similarity(pattern, kata) >= 0.75:
-                        text = text.replace(kata, pattern)
-                        found = True
+                if (
+                    kata not in kata_penting
+                    and matcher.similarity(pattern, kata) >= 0.75
+                ):
+                    text = text.replace(kata, pattern)
+                    found = True
 
         if found:
             return "Mungkin maksud kamu:\n" + text
