@@ -1,6 +1,5 @@
 import sqlite3
 import datetime
-import time
 
 #root of path
 path = '../test/'
