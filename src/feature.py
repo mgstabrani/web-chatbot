@@ -12,8 +12,8 @@ def tampilDeadline(usrMsg):
     deadline = db.getList_Daftar_Tugas_Status(False)
     for i in range(len(deadline)):
         #General untuk tugas
-        if(matcher.match(usrMsg,"tugas")):
-            if(matcher.match(usrMsg,deadline[i][2].lower())):
+        if matcher.match(usrMsg,"tugas"):
+            if matcher.match(usrMsg,deadline[i][2].lower()):
                 return deadline[i][1]
         #Spesifik, tucil, tubes atau pr
         else:
@@ -26,12 +26,12 @@ def tandaiTask(usrMsg):
     deadline = db.getList_Daftar_Tugas_Status(False)
     temp = re.findall(r'\d+', usrMsg)
     id = list(map(int, temp))
-    if(len(id) > 0):
+    if len(id) > 0:
         id = str(id[0])
     else:
         id = str(-1)
     for i in range(len(deadline)):
-        if(id == deadline[i][0]):
+        if id == deadline[i][0]:
             db.upsert_Daftar_Tugas(deadline[i][0], deadline[i][1], deadline[i][2], deadline[i][3], deadline[i][4], True)
             return "Task ditandai selesai"
     return "Task tidak ditemukan"
@@ -49,22 +49,22 @@ def help():
 
 def process(usrMsg):
     result = at.ValidasiInput(usrMsg)
-    if(result =="-1"):
+    if result =="-1":
         text = str(usrMsg).lower()
 
         #Menampilkan help
         for pattern in kata_help:
-            if (matcher.match(text, pattern)) :
+            if matcher.match(text, pattern) :
                 return help()
 
         #Menandai task selesai
         for pattern in kata_task_selesai:
-            if (matcher.match(text, pattern)) :
+            if matcher.match(text, pattern) :
                 return tandaiTask(text)    
 
         #Menampilkan tanggal deadline suatu task
         for pattern in kata_tampil_deadline:
-            if (matcher.match(text, pattern)) :
+            if matcher.match(text, pattern) :
                 return tampilDeadline(text)
 
         kata_penting = db.getList_Kata_Help()
