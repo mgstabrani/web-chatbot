@@ -86,6 +86,6 @@ def process(usrMsg):
             return "Mungkin maksud kamu:\n" + text
 
         return "Maaf, pesan tidak dikenali"
-        
+
     else:
         return result
