@@ -50,10 +50,7 @@ def lev(strA, strB, i, j):
     if min(i,j) == 0:
         return max(i,j)
 
-    levi = []
-
-    levi.append(lev(strA, strB, i-1, j)+1)
-    levi.append(lev(strA, strB, i, j-1)+1)
+    levi = [lev(strA, strB, i-1, j)+1, lev(strA, strB, i, j-1)+1]
     
     x = lev(strA, strB, i-1, j-1)
     if strA[i-1] != strB[j-1]:
