@@ -212,7 +212,7 @@ def minggutask_Jenis(text,jenis):
 def nHariKedepan(N):
     base = datetime.datetime.today()
     date_list = [base + datetime.timedelta(days=x) for x in range(N+1)]
-    dateEND = date_list[len(date_list)-1].date()
+    dateEND = date_list[-1].date()
     return dateEND
 
 def hariIni():
