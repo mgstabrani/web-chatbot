@@ -55,7 +55,7 @@ def ValidasiInput(text):
             return """Gunakan kata ["tubes", "tucil", "kuis", "ujian", "pr"]"""
         return add(text)
 
-    elif "antara" in data:
+    if "antara" in data:
         if "tubes" in data:
             return antaraTanggal_Jenis(text,"tubes")
         if "tucil" in data:
@@ -68,7 +68,7 @@ def ValidasiInput(text):
             return antaraTanggal_Jenis(text,"pr")
         return antaraTanggal(text)
 
-    elif "depan" in data:
+    if "depan" in data:
 
         if "hari" in data:
             if "tubes" in data:
@@ -96,7 +96,7 @@ def ValidasiInput(text):
             return minggutask(text)
         return "-1"
 
-    elif "deadline" in data:
+    if "deadline" in data:
         if "hari" in data:
             if "tubes" in data:
                 return hariIni_Jenis("tubes")
@@ -123,8 +123,7 @@ def ValidasiInput(text):
                 return sejauhIni_Jenis("pr")
             return sejauhIni()
         return "-1"
-    else:
-        return "-1"
+    return "-1"
 
 def haritask_Jenis(text,jenis):
     found = False
