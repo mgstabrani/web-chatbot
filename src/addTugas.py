@@ -49,88 +49,83 @@ def ValidasiInput(text):
             return """Gunakan kata "pada" sebelum tanggal"""
         return diundurTask(text)
 
-    else:
+    if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
+        if len(data)== 1:
+            if("tanggal" not in data and "pada" not in data):
+                return """Gunakan kata ["tangal", "pada"] sebelum tanggal"""
+            return """Gunakan kata ["tubes", "tucil", "kuis", "ujian", "pr"]"""
+        return add(text)
 
-        if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
-            if len(data)== 1:
-                if("tanggal" not in data and "pada" not in data):
-                    return """Gunakan kata ["tangal", "pada"] sebelum tanggal"""
-                return """Gunakan kata ["tubes", "tucil", "kuis", "ujian", "pr"]"""
-            else:
-                return add(text)
+    elif "antara" in data:
+        if "tubes" in data:
+            return antaraTanggal_Jenis(text,"tubes")
+        if "tucil" in data:
+            return antaraTanggal_Jenis(text,"tucil")
+        if "kuis" in data:
+            return antaraTanggal_Jenis(text,"kuis")
+        if "ujian" in data:
+            return antaraTanggal_Jenis(text,"ujian")
+        if "pr" in data:
+            return antaraTanggal_Jenis(text,"pr")
+        return antaraTanggal(text)
 
-        elif "antara" in data:
+    elif "depan" in data:
+
+        if "hari" in data:
             if "tubes" in data:
-                return antaraTanggal_Jenis(text,"tubes")
+                return haritask_Jenis(text,"tubes")
             if "tucil" in data:
-                return antaraTanggal_Jenis(text,"tucil")
+                return haritask_Jenis(text,"tucil")
             if "kuis" in data:
-                return antaraTanggal_Jenis(text,"kuis")
+                return haritask_Jenis(text,"kuis")
             if "ujian" in data:
-                return antaraTanggal_Jenis(text,"ujian")
+                return haritask_Jenis(text,"ujian")
             if "pr" in data:
-                return antaraTanggal_Jenis(text,"pr")
-            return antaraTanggal(text)
+                return haritask_Jenis(text,"pr")
+            return haritask(text)
+        if "minggu" in data:
+            if "tubes" in data:
+                return minggutask_Jenis(text,"tubes")
+            if "tucil" in data:
+                return minggutask_Jenis(text,"tucil")
+            if "kuis" in data:
+                return minggutask_Jenis(text,"kuis")
+            if "ujian" in data:
+                return minggutask_Jenis(text,"ujian")
+            if "pr" in data:
+                return minggutask_Jenis(text,"pr")
+            return minggutask(text)
+        return "-1"
 
-        elif "depan" in data:
+    elif "deadline" in data:
+        if "hari" in data:
+            if "tubes" in data:
+                return hariIni_Jenis("tubes")
+            if "tucil" in data:
+                return hariIni_Jenis("tucil")
+            if "kuis" in data:
+                return hariIni_Jenis("kuis")
+            if "ujian" in data:
+                return hariIni_Jenis("ujian")
+            if "pr" in data:
+                return hariIni_Jenis("pr")
+            return hariIni()
 
-            if "hari" in data:
-                if "tubes" in data:
-                    return haritask_Jenis(text,"tubes")
-                if "tucil" in data:
-                    return haritask_Jenis(text,"tucil")
-                if "kuis" in data:
-                    return haritask_Jenis(text,"kuis")
-                if "ujian" in data:
-                    return haritask_Jenis(text,"ujian")
-                if "pr" in data:
-                    return haritask_Jenis(text,"pr")
-                return haritask(text)
-            elif "minggu" in data:
-                if "tubes" in data:
-                    return minggutask_Jenis(text,"tubes")
-                if "tucil" in data:
-                    return minggutask_Jenis(text,"tucil")
-                if "kuis" in data:
-                    return minggutask_Jenis(text,"kuis")
-                if "ujian" in data:
-                    return minggutask_Jenis(text,"ujian")
-                if "pr" in data:
-                    return minggutask_Jenis(text,"pr")
-                return minggutask(text)
-            else:
-                return "-1"
-
-        elif "deadline" in data:
-            if "hari" in data:
-                if "tubes" in data:
-                    return hariIni_Jenis("tubes")
-                if "tucil" in data:
-                    return hariIni_Jenis("tucil")
-                if "kuis" in data:
-                    return hariIni_Jenis("kuis")
-                if "ujian" in data:
-                    return hariIni_Jenis("ujian")
-                if "pr" in data:
-                    return hariIni_Jenis("pr")
-                return hariIni()
-
-            elif "sejauh" in data:
-                if "tubes" in data:
-                    return sejauhIni_Jenis("tubes")
-                if "tucil" in data:
-                    return sejauhIni_Jenis("tucil")
-                if "kuis" in data:
-                    return sejauhIni_Jenis("kuis")
-                if "ujian" in data:
-                    return sejauhIni_Jenis("ujian")
-                if "pr" in data:
-                    return sejauhIni_Jenis("pr")
-                return sejauhIni()
-            else:
-                return "-1"
-        else:
-            return "-1"
+        if "sejauh" in data:
+            if "tubes" in data:
+                return sejauhIni_Jenis("tubes")
+            if "tucil" in data:
+                return sejauhIni_Jenis("tucil")
+            if "kuis" in data:
+                return sejauhIni_Jenis("kuis")
+            if "ujian" in data:
+                return sejauhIni_Jenis("ujian")
+            if "pr" in data:
+                return sejauhIni_Jenis("pr")
+            return sejauhIni()
+        return "-1"
+    else:
+        return "-1"
 
 def haritask_Jenis(text,jenis):
     found = False
@@ -411,8 +406,7 @@ def add(text):
             output += "(ID: " +str(N) +") " + str(date)+" "+data[1]+" "+data[2]+" "+data[3] +"<br>"
             return output
         return "Data yang sama telah digunakan"
-    else:
-        return "-1"
+    return "-1"
 
 
 #add(text)
