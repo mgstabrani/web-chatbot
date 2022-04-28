@@ -14,7 +14,7 @@ def boyer_moore(text, pattern):
     if n < m :
         # jika panjang pattern lebih besar, return INVALID
         return -1
-    
+
     last = lastOf(pattern)
     i = m - 1
     j = m - 1
@@ -51,7 +51,7 @@ def lev(strA, strB, i, j):
         return max(i,j)
 
     levi = [lev(strA, strB, i-1, j)+1, lev(strA, strB, i, j-1)+1]
-    
+
     x = lev(strA, strB, i-1, j-1)
     if strA[i-1] != strB[j-1]:
         x += 1
@@ -62,7 +62,7 @@ def lev(strA, strB, i, j):
 
 
 def levenshtein(strA, strB):
-    
+
     return lev(strA, strB, len(strA), len(strB))
 
 def similarity(strA, strB):
