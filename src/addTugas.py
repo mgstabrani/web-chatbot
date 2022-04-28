@@ -38,7 +38,7 @@ def daftar_katakunci(text):
             index = matcher.match( textlist[i].lower(),kata.lower())
             if index:
                 data.append(kata)
-                
+
 
     return data
 
@@ -48,9 +48,9 @@ def ValidasiInput(text):
         if "pada" not in data:
             return """Gunakan kata "pada" sebelum tanggal"""
         return diundurTask(text)
-    
+
     else:
-        
+
         if len(data) <= 2 and "antara" not in data and "depan" not in data and "deadline" not in data:
             if len(data)== 1:
                 if("tanggal" not in data and "pada" not in data):
@@ -71,9 +71,9 @@ def ValidasiInput(text):
             if "pr" in data:
                 return antaraTanggal_Jenis(text,"pr")
             return antaraTanggal(text)
-          
+
         elif "depan" in data:
-            
+
             if "hari" in data:
                 if "tubes" in data:
                     return haritask_Jenis(text,"tubes")
@@ -114,7 +114,7 @@ def ValidasiInput(text):
                 if "pr" in data:
                     return hariIni_Jenis("pr")
                 return hariIni()
-                
+
             elif "sejauh" in data:
                 if "tubes" in data:
                     return sejauhIni_Jenis("tubes")
@@ -143,7 +143,7 @@ def haritask_Jenis(text,jenis):
             dateEnd =nHariKedepan(N)
             output = "[Menampilkan " + jenis +" "+ str(N) +" hari ke depan]<br>"
             daftar =bd.getList_Daftar_Tugas_Jenis_tgl(jenis,datetime.date.today(),dateEnd,0)
-            
+
             if len(daftar)== 0:
                 return "Tidak ada "+ jenis+ " "+ str(N) +" hari ke depan"
             for tugas in daftar:
@@ -164,7 +164,7 @@ def haritask(text):
             dateEnd =nHariKedepan(N)
             output = "[Menampilkan Tugas " + str(N) +" hari ke depan]<br>"
             daftar =bd.getList_Daftar_Tugas_tgl(datetime.date.today(),dateEnd,0)
-            
+
             if len(daftar)== 0:
                 return "Tidak ada "+ "deadline"+ " "+ str(N) +" hari ke depan"
             for tugas in daftar:
@@ -184,7 +184,7 @@ def minggutask(text):
             dateEnd =nHariKedepan(N*7)
             output = "[Menampilkan Tugas " + str(N) +" minggu ke depan]<br>"
             daftar =bd.getList_Daftar_Tugas_tgl(datetime.date.today(),dateEnd,0)
-            
+
             if len(daftar)== 0:
                 return "Tidak ada "+ "deadline"+ " "+ str(N) +" minggu ke depan"
             for tugas in daftar:
@@ -230,7 +230,7 @@ def hariIni():
     for tugas in daftar:
         output += "(ID: " +tugas[0] +") " + tugas[1] +" "+ tugas[2] +" "+tugas[3] +" <br>"
     return output
-    
+
 def hariIni_Jenis(jenis):
     output = "[Menampilkan "+jenis +" hari ini]<br>"
     daftar = bd.getList_Daftar_Tugas_Jenis_tgl(jenis,datetime.date.today(),datetime.date.today(),False)
@@ -256,7 +256,7 @@ def sejauhIni_Jenis(jenis):
         return "Tidak ada deadline "+jenis+" sejauh ini"
     for tugas in daftar:
         output += "(ID: " +tugas[0] +") " + tugas[1] +" "+tugas[2] +" "+ tugas[3] +" <br>"
-    
+
     return str(output)
 
 def antaraTanggal(text):
@@ -337,10 +337,10 @@ def diundurTask(usrMsg):
     text = str(usrMsg).split(" ")
     for i in range(len(text)):
         if(matcher.match(text[i],"undur")or matcher.match(text[i],"ubah")):
-            
+
             if len(text[i+2]) > 2:
                 tanggal = text[i+2]
-                    
+
             else:
                 bulan_int = bulan.get(text[i+3].lower())
                 tanggal = text[i+2] +"/"+ bulan_int +"/"+text[i+4]
@@ -354,7 +354,7 @@ def diundurTask(usrMsg):
             return output
     if found is False:
         return "-1"
-    
+
 def add(text):
     data = []
     textlist = text.split(" ")
@@ -366,7 +366,7 @@ def add(text):
                 data.append(textlist[i+1])
                 data.append(str(textlist[i]).lower())
                 nama = textlist[i+2]
-        
+
                 pada_tgl = ["pada","tanggal"]
                 for kata2 in pada_tgl:
                     for k in range(len(textlist[i+2+1:])):
@@ -375,7 +375,7 @@ def add(text):
                             for j in range(k-1):
                                 nama += " "+ textlist[i+2+j+1]
                             break
-                
+
                     if index2:
                         break
 
@@ -392,7 +392,7 @@ def add(text):
             if index:
                 if len(textlist[i+1]) > 2:
                     data.insert(0,textlist[i+1])
-                    
+
                 else:
                     bulan_int = bulan.get(textlist[i+2].lower())
                     tanggal = textlist[i+1] +"/"+ bulan_int +"/"+textlist[i+3]
@@ -418,7 +418,7 @@ def add(text):
 #add(text)
 #print( bd.getList_Daftar_Tugas_tglMulai(datetime.date.today(),False))
 # print(ValidasiInput(text))
-        
 
-        
-    
+
+
+

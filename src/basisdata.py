@@ -37,7 +37,7 @@ def createDB():
         CREATE TABLE IF NOT EXISTS Fitur (
             Text    TEXT NOT NULL UNIQUE
         )
-        
+
         """)
     conn.commit()
 
@@ -191,7 +191,7 @@ def getList_Daftar_Tugas_tglMulai(tglMulai, status):
         data.append(kata.split("#-#"))
 
     return data
-    
+
 def getList_Daftar_Tugas_Jenis_tglMulai(jenis,tglMulai, status):
     conn = sqlite3.connect(path +'BasisData.sqlite')
     cur = conn.cursor()
@@ -226,7 +226,7 @@ def getList_Kata_Help():
         kata = str(kata).replace("('","")
         kata = str(kata).replace("',)","")
         data.append(kata)
-    
+
     return data
 
 def insert_Kata_penting(kata):
@@ -247,7 +247,7 @@ def getList_Kata_Penting():
         kata = str(kata).replace("('","")
         kata = str(kata).replace("',)","")
         data.append(kata)
-    
+
     return data
 
 def insert_Kata_Tampil_Deadline(kata):
@@ -268,7 +268,7 @@ def getList_Kata_Tampil_Deadline():
         kata = str(kata).replace("('","")
         kata = str(kata).replace("',)","")
         data.append(kata)
-    
+
     return data
 
 def insert_Kata_Task_Selesai(kata):
@@ -289,7 +289,7 @@ def getList_Kata_Task_Selesai():
         kata = str(kata).replace("('","")
         kata = str(kata).replace("',)","")
         data.append(kata)
-    
+
     return data
 
 def insert_Fitur(kata):
@@ -310,7 +310,7 @@ def getList_Fitur():
         kata = str(kata).replace("('","")
         kata = str(kata).replace("',)","")
         data.append(kata)
-    
+
     return data
 
 def Insert_standar():
@@ -334,19 +334,19 @@ def Insert_standar():
 
     for kata in kata_penting:
         insert_Kata_penting(kata)
-    
+
     for kata in kata_help:
         insert_Kata_Help(kata)
-    
+
     for kata in kata_tampil_deadline:
         insert_Kata_Tampil_Deadline(kata)
-    
+
     for kata in kata_task_selesai:
         insert_Kata_Task_Selesai(kata)
 
     for kata in fitur:
         insert_Fitur(kata)
-    
+
     for List in deadline:
         (tgl,bln,th) = List[1].split("/")
         date = datetime.date(int(th),int(bln),int(tgl))
