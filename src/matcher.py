@@ -23,9 +23,8 @@ def boyer_moore(text, pattern):
         if text[i] == pattern[j]: # looking glass technique
             if j == 0:
                 return i
-            else :
-                i -= 1
-                j -= 1
+            i -= 1
+            j -= 1
         else : # character-jump technique
             if text[i] not in last:
                 # case 3. text[i] not found in pattern
