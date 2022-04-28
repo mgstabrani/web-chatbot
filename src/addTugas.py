@@ -352,7 +352,7 @@ def diundurTask(usrMsg):
             output = "Deadline Tugas ID "+ text[i-1] +"<br>"
             output += "berhasil diperbarui menjadi " +str(date) +" <br>"
             return output
-    if found == False:
+    if found is False:
         return "-1"
     
 def add(text):
