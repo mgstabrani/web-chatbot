@@ -18,7 +18,6 @@ bulan = {
     "desember":"12"
 }
 
-# text = "ID 4 diubah pada 3/05/2021"
 
 
 def daftar_katakunci(text):
